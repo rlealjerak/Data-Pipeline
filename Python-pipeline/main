@@ -1,0 +1,19 @@
+import pandas as pd 
+
+def extract_data(file_path):
+    #Extrac data from the first source 
+    data = pd.read_csv(file_path)
+    return data 
+#Define the path of all the sources 
+file_paths = [
+    '/Users/rlealjerak/Documents/Data-Pipeline/Python-pipeline/insufficient physical activity.csv',
+    '/Users/rlealjerak/Documents/Data-Pipeline/Python-pipeline/Prevalence of obesity.csv',
+    '/Users/rlealjerak/Documents/Data-Pipeline/Python-pipeline/Diabetes data 1.csv',
+    '/Users/rlealjerak/Documents/Data-Pipeline/Python-pipeline/Diabetes data 2.csv'
+]
+#Usage 
+datasets = []
+for path in file_paths: 
+    print(f"Extracting data from {path}")
+    data = extract_data(path)
+    datasets.append(data) 
