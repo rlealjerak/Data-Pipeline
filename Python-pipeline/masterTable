@@ -1,0 +1,36 @@
+import sqlite3
+
+class DatabaseConnection:
+    def __init__(self, db_name="diabetes.db"):
+        """Initialize the database connection object."""
+        self.db_name = db_name
+        self.connect_db()  # Automatically connect when the object is created
+
+    def connect_db(self):
+        """Connect to the SQLite database and create the table if it doesn't exist."""
+        self.conn = sqlite3.connect(self.db_name)
+        self.cursor = self.conn.cursor()
+
+        # Create the table
+        self.cursor.execute("""
+            CREATE TABLE IF NOT EXISTS type2_diabetes_data (
+                year TEXT,
+                continent TEXT,
+                country TEXT,
+                age_range INTEGER,
+                diabetic_prevalence_rate FLOAT,
+                physical_inactivity_rate FLOAT,
+                obesity_rate FLOAT
+            )
+        """)
+
+        self.conn.commit()
+        print("Database connected and table created successfully!")
+
+    def close(self):
+        """Close the database connection."""
+        if self.conn:
+            self.conn.close()
+            print("Database connection closed.")
+
+
